@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: hidden;
+}
+
+.chat-messages {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.typing-animation {
+  text-align: center;
+}
+
+.green-text {
+  color: #7cff7c;
+  font-weight: 700;
+  font-size: 2.6rem; /* larger, Gemini-like header */
+  letter-spacing: 0.6px;
+}
+
+.second-line {
+  margin-top: 10px;
+}
+
+.second-line span {
+  color: #e6ffe6;
+  font-size: 1.4rem;
+  opacity: 0.95;
+}
+
+.loki-logo {
+  width: 100px; /* Adjust as needed */
+  filter: drop-shadow(0 0 10px green);
+}
+
+.logo-container {
+  position: relative;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  perspective: 800px;
+  transform-style: preserve-3d;
+}
+
+@keyframes spinX {
+  from {
+    transform: translate(-50%, -50%) rotateX(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(360deg);
+  }
+}
+
+@keyframes spinY {
+  from {
+    transform: translate(-50%, -50%) rotateY(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(360deg);
+  }
+}
+
+@keyframes spinY-reverse {
+  from {
+    transform: translate(-50%, -50%) rotateY(360deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(0deg);
+  }
+}
+
+/* Spinning rings around the logo */
+.logo-container .ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Inner ring: close to the logo and spins horizontally (rotateX) */
+.logo-container .ring1 {
+  width: 90px;
+  height: 90px;
+  border: 3px solid rgba(0, 255, 0, 0.28);
+  box-shadow: 0 0 18px rgba(0, 255, 0, 0.45), 0 0 30px rgba(0, 255, 0, 0.12);
+  z-index: 2;
+  animation: spinX 6s linear infinite;
+}
+
+/* Middle ring: slightly larger and spins vertically (rotateY) */
+.logo-container .ring2 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid rgba(0, 255, 0, 0.22);
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.35), 0 0 24px rgba(0, 255, 0, 0.08);
+  z-index: 1;
+  animation: spinY 10s linear infinite;
+}
+
+/* Outermost ring, spins opposite to ring2 */
+.logo-container .loki-logo,
+.logo-container img.loki-logo {
+  z-index: 3;
+  position: relative;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.04), transparent);
+}
+
+/* small margin so the typing text sits above the input */
+.typing-animation.above-input {
+  margin-bottom: 18px;
+}

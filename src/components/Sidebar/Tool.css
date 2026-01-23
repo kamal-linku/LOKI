@@ -1,0 +1,20 @@
+.tool {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tool.collapsed {
+  justify-content: center;
+  padding: 10px;
+}
+
+.tool:hover {
+  background: #2a2a2a;
+}
+
+.tool.collapsed .tool-icon {
+  margin-right: 0;
+}

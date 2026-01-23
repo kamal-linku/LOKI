@@ -1,0 +1,28 @@
+.ai-response {
+  display: flex;
+  align-items: flex-start;
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.ai-icon {
+  margin-right: 10px;
+}
+
+.ai-message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-text {
+  /* Existing styles */
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 5px;
+  align-self: flex-start;
+}

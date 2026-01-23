@@ -1,0 +1,12 @@
+.attachment-wrapper {
+  position: relative;
+}
+
+.attach-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}

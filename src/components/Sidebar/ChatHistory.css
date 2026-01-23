@@ -1,0 +1,20 @@
+.chat-history {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.chat-history h4 {
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #888;
+}
+
+.chat-history p {
+  margin: 6px 0;
+  cursor: pointer;
+}
+
+.chat-history p:hover {
+  color: #fff;
+}

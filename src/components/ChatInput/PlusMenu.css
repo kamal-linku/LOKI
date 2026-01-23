@@ -1,0 +1,61 @@
+.plus-menu {
+  position: absolute;
+  bottom: 50px; /* Position above the input */
+  left: 0;
+  background: #404040;
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 20;
+  transform-origin: bottom left;
+}
+
+.plus-menu button {
+  background: none;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.plus-menu button:hover {
+  background: #555;
+}
+
+.plus-menu.pop-up {
+  animation: pop-up-animation 0.2s ease-out forwards;
+}
+
+.plus-menu.pop-down {
+  animation: pop-down-animation 0.2s ease-in forwards;
+}
+
+@keyframes pop-up-animation {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pop-down-animation {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+}
