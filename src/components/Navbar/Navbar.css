@@ -1,6 +1,8 @@
 .navbar {
   padding: 16px;
   text-align: center;
+  position: relative;
+  z-index: 998;
 }
 
 .navbar-container {

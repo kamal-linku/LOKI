@@ -160,3 +160,10 @@
 .sidebar-footer span {
   color: #888;
 }
+
+/* Hide desktop collapse button on mobile */
+@media (max-width: 768px) {
+  .toggle-button {
+    display: none;
+  }
+}
