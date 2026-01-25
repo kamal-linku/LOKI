@@ -12,12 +12,13 @@ export default function Sidebar({
   currentSessionId,
   searchQuery,
   onSearchChange,
+  className,
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleCollapse = () => setIsCollapsed(!isCollapsed);
   return (
-    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <aside className={`sidebar ${isCollapsed ? 'collapsed' : ''} ${className || ''}`}>
       <div className="sidebar-header">
         {!isCollapsed && <div className="sidebar-title">LOKI</div>}
         <button className="toggle-button" onClick={toggleCollapse}>

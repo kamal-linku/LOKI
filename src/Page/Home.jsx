@@ -13,6 +13,7 @@ export default function Home() {
   ]);
   const [currentSessionId, setCurrentSessionId] = useState(initialSessionId);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const handleSendMessage = (message) => {
     if (message.trim() !== "") {
@@ -50,10 +51,12 @@ export default function Home() {
       ]);
       setCurrentSessionId(newSessionId);
     }
+    setShowSidebar(false); // Close sidebar on mobile after new chat
   };
 
   const handleSelectChat = (sessionId) => {
     setCurrentSessionId(sessionId);
+    setShowSidebar(false); // Close sidebar on mobile after selection
   };
 
   const handleDeleteChat = (sessionId) => {
@@ -74,6 +77,10 @@ export default function Home() {
     setSearchQuery(query);
   };
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   const filteredChatSessions = chatSessions.filter((session) =>
     session.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -92,9 +99,11 @@ export default function Home() {
         currentSessionId={currentSessionId}
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}
+        className={showSidebar ? 'show' : ''}
       />
+      {showSidebar && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
       <main className="main">
-        <Navbar />
+        <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
         <Container messages={currentChat ? currentChat.messages : []} />
         <ChatInput onSendMessage={handleSendMessage} />
       </main>
