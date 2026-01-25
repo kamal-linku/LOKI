@@ -1,3 +1,4 @@
+import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
 
 export default function Navbar({ toggleSidebar, showSidebar }) {
@@ -5,7 +6,7 @@ export default function Navbar({ toggleSidebar, showSidebar }) {
     <nav className="navbar">
       <div className="navbar-container">
         <button className="menu-button" onClick={toggleSidebar}>
-          {showSidebar ? "X" : "☰"}
+          {showSidebar ? <FiX /> : <FiMenu />}
         </button>
         <div className="navbar-title">LOKI</div>
       </div>
