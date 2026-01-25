@@ -52,6 +52,12 @@
   display: flex;
   align-items: center;
   border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.sidebar-item:hover .menu-button {
+  opacity: 1;
 }
 
 .menu-button:hover {
@@ -68,6 +74,7 @@
   padding: 5px;
   z-index: 10;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  min-width: 100px;
 }
 
 .delete-menu button {
@@ -86,4 +93,25 @@
 
 .delete-menu button:hover {
   background-color: #555;
+}
+
+/* Collapsed state adjustments */
+.sidebar.collapsed .sidebar-item {
+  justify-content: center;
+}
+
+
+
+.sidebar.collapsed .sidebar-item:hover .menu-button {
+  opacity: 1;
+}
+
+.sidebar.collapsed .sidebar-item-menu {
+  position: absolute;
+  right: 5px;
+}
+
+.sidebar.collapsed .delete-menu {
+  right: -110px; /* Position outside the collapsed sidebar */
+  top: 0;
 }

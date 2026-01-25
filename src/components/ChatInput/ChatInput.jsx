@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import "./ChatInput.css";
 import Attachment from "./Attachment";
 import AttachmentPreview from "./AttachmentPreview";
-import RecordingAnimation from "./RecordingAnimation";
 import { FiMic, FiSend } from "react-icons/fi";
 
 const SpeechRecognition =
@@ -14,12 +13,6 @@ export default function ChatInput({ onSendMessage }) {
   const [attachments, setAttachments] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef(null);
-  const [frequencyData, setFrequencyData] = useState(new Uint8Array(0));
-  const audioContextRef = useRef(null);
-  const analyserRef = useRef(null);
-  const dataArrayRef = useRef(null);
-  const animationFrameId = useRef(null);
-  const streamRef = useRef(null);
 
   useEffect(() => {
     if (!isSpeechRecognitionSupported) {
@@ -27,21 +20,16 @@ export default function ChatInput({ onSendMessage }) {
     }
 
     const recognition = new SpeechRecognition();
-    recognition.continuous = true;
+    recognition.continuous = false; // Set to false for single phrase recognition
     recognition.interimResults = true;
     recognition.lang = "en-US";
 
     recognition.onresult = (event) => {
-      let finalTranscript = "";
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          finalTranscript += event.results[i][0].transcript;
-        }
+      let transcript = "";
+      for (let i = 0; i < event.results.length; ++i) {
+        transcript += event.results[i][0].transcript;
       }
-      if (finalTranscript) {
-        setInputValue((prev) => prev + finalTranscript);
-        stopRecording(); // Stop recording as soon as we have a final result
-      }
+      setInputValue(transcript);
     };
 
     recognition.onend = () => {
@@ -50,63 +38,30 @@ export default function ChatInput({ onSendMessage }) {
 
     recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
+      if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+        alert("Voice input is not allowed. Please check your microphone permissions.");
+      }
       stopRecording();
     };
 
     recognitionRef.current = recognition;
 
     return () => {
-      if (recognition) {
-        recognition.stop();
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
       }
-      stopRecordingAnimation();
     };
   }, []);
 
-  const startRecording = async () => {
+  const startRecording = () => {
     try {
       setInputValue("");
       recognitionRef.current.start();
       setIsRecording(true);
-
-      streamRef.current = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
-      audioContextRef.current = new (window.AudioContext ||
-        window.webkitAudioContext)();
-      analyserRef.current = audioContextRef.current.createAnalyser();
-      const source =
-        audioContextRef.current.createMediaStreamSource(streamRef.current);
-      source.connect(analyserRef.current);
-      analyserRef.current.fftSize = 32;
-      const bufferLength = analyserRef.current.frequencyBinCount;
-      dataArrayRef.current = new Uint8Array(bufferLength);
-
-      const updateAnimation = () => {
-        analyserRef.current.getByteFrequencyData(dataArrayRef.current);
-        setFrequencyData(new Uint8Array(dataArrayRef.current));
-        animationFrameId.current = requestAnimationFrame(updateAnimation);
-      };
-
-      updateAnimation();
     } catch (error) {
       console.error("Error starting recording:", error);
       setIsRecording(false);
     }
-  };
-
-  const stopRecordingAnimation = () => {
-    if (animationFrameId.current) {
-      cancelAnimationFrame(animationFrameId.current);
-    }
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((track) => track.stop());
-    }
-    if (audioContextRef.current && audioContextRef.current.state !== "closed") {
-      audioContextRef.current.close();
-    }
-    // clear visual data
-    setFrequencyData(new Uint8Array(0));
   };
 
   const stopRecording = () => {
@@ -114,7 +69,6 @@ export default function ChatInput({ onSendMessage }) {
       recognitionRef.current.stop();
     }
     setIsRecording(false);
-    stopRecordingAnimation();
   };
 
   const handleMicClick = () => {
@@ -183,15 +137,8 @@ export default function ChatInput({ onSendMessage }) {
               ? handleSendMessage
               : handleMicClick
           }
-          disabled={(inputValue || attachments.length > 0) && isRecording}
         >
-          {inputValue || attachments.length > 0 ? (
-            <FiSend />
-          ) : isRecording ? (
-            <RecordingAnimation frequencyData={frequencyData} />
-          ) : (
-            <FiMic />
-          )}
+          {inputValue || attachments.length > 0 ? <FiSend /> : <FiMic />}
         </button>
       </div>
     </div>

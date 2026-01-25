@@ -4,7 +4,7 @@ import AIResponse from "./AIResponse";
 import lokiLogo from "../../assets/loki_logo.png";
 import "./Container.css";
 
-export default function Container({ messages }) {
+export default function Container({ messages, onDeleteMessage }) {
   const chatMessagesRef = useRef(null);
 
   useEffect(() => {
@@ -34,9 +34,9 @@ export default function Container({ messages }) {
         <div className="chat-messages" ref={chatMessagesRef}>
           {messages.map((msg, index) =>
             msg.type === "user" ? (
-              <UserMessage key={index} message={msg.text} timestamp={msg.timestamp} />
+              <UserMessage key={index} message={msg.text} timestamp={msg.timestamp} onDelete={() => onDeleteMessage(index)} />
             ) : (
-              <AIResponse key={index} message={msg.text} timestamp={msg.timestamp} />
+              <AIResponse key={index} message={msg.text} timestamp={msg.timestamp} onDelete={() => onDeleteMessage(index)} />
             )
           )}
         </div>

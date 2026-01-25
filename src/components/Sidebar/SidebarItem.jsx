@@ -24,7 +24,7 @@ export default function SidebarItem({
 
   return (
     <div
-      className={`sidebar-item ${isActive ? "active" : ""}`}
+      className={`sidebar-item ${isActive ? "active" : ""} ${isCollapsed ? "collapsed" : ""}`}
       onClick={() => onSelectChat(session.id)}
     >
       <div className="sidebar-item-content">
@@ -35,7 +35,7 @@ export default function SidebarItem({
           </div>
         )}
       </div>
-      {session.messages.length > 0 && !isCollapsed && (
+      {session.messages.length > 0 && (
         <div className="sidebar-item-menu">
           <button className="menu-button" onClick={handleMenuClick}>
             <FiMoreVertical />

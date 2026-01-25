@@ -73,6 +73,18 @@ export default function Home() {
     }
   };
 
+  const handleDeleteMessage = (sessionId, messageIndex) => {
+    setChatSessions((prevSessions) =>
+      prevSessions.map((session) => {
+        if (session.id === sessionId) {
+          const newMessages = session.messages.filter((_, index) => index !== messageIndex);
+          return { ...session, messages: newMessages, lastUpdated: new Date() };
+        }
+        return session;
+      })
+    );
+  };
+
   const handleSearchChange = (query) => {
     setSearchQuery(query);
   };
@@ -104,7 +116,7 @@ export default function Home() {
       {showSidebar && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
       <main className="main">
         <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
-        <Container messages={currentChat ? currentChat.messages : []} />
+        <Container messages={currentChat ? currentChat.messages : []} onDeleteMessage={(messageIndex) => handleDeleteMessage(currentSessionId, messageIndex)} />
         <ChatInput onSendMessage={handleSendMessage} />
       </main>
     </div>
