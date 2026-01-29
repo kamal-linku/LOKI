@@ -34,6 +34,7 @@
   align-items: center;
   padding: 14px 16px;
   border-bottom: 1px solid var(--border-color);
+  position: relative;
 }
 
 .sidebar-title {
@@ -58,6 +59,22 @@
 }
 
 .toggle-button:hover {
+  background: var(--bg-hover);
+}
+
+.hamburger-menu {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  display: none;
+}
+
+.hamburger-menu:hover {
   background: var(--bg-hover);
 }
 
@@ -165,5 +182,9 @@
 @media (max-width: 768px) {
   .toggle-button {
     display: none;
+  }
+  .sidebar-header {
+    padding: 10px 12px;
+    justify-content: center;
   }
 }

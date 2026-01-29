@@ -1,14 +1,14 @@
-import { FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
+import { FiMenu } from "react-icons/fi";
 
-export default function Navbar({ toggleSidebar, showSidebar }) {
+export default function Navbar({ toggleSidebar }) {
   return (
     <nav className="navbar">
+      <button className="hamburger-menu-navbar" onClick={toggleSidebar}>
+        <FiMenu />
+      </button>
       <div className="navbar-container">
-        <button className="menu-button" onClick={toggleSidebar}>
-          {showSidebar ? <FiX /> : <FiMenu />}
-        </button>
-        <div className="navbar-title">LOKI</div>
+        <div className="navbar-title">New Chat</div>
       </div>
     </nav>
   );

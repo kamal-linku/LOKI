@@ -16,14 +16,20 @@
 @media (max-width: 768px) {
   .home {
     flex-direction: column;
+    overflow: hidden;
   }
   .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
+    width: 260px !important;
+    height: 100vh;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
+  }
+  .sidebar.collapsed {
+    width: 260px !important;
   }
   .sidebar.show {
     transform: translateX(0);

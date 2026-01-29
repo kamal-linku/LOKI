@@ -171,7 +171,7 @@ export default function Home() {
       />
       {showSidebar && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
       <main className="main">
-        <Navbar toggleSidebar={toggleSidebar} showSidebar={showSidebar} />
+        <Navbar toggleSidebar={toggleSidebar} />
         <Container messages={currentChat ? currentChat.messages : []} onDeleteMessage={(messageIndex) => handleDeleteMessage(currentSessionId, messageIndex)} />
         <ChatInput onSendMessage={handleSendMessage} />
       </main>
