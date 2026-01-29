@@ -5,6 +5,7 @@
   width: 100%;
   padding: 20px;
   background-color: #000000;
+  margin-bottom: 20px;
 }
 
 .attachment-previews {
@@ -22,6 +23,7 @@
   padding: 12px;
   border-radius: 999px;
   width: 100%;
+  max-width: 800px;
 }
 
 
@@ -35,15 +37,26 @@
 }
 
 .chat-input .icon-button {
-  background: transparent;
+  background: #404040;
   border: none;
   color: white;
   cursor: pointer;
   margin: 0 5px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chat-input .icon-button:hover {
+  background-color: #555;
 }
 
 .chat-input .icon-button svg {
-  font-size: 18px;
+  font-size: 20px;
   animation: icon-appear 0.2s ease-in-out;
 }
 

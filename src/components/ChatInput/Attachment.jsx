@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import "./Attachment.css";
-import { FiPlus, FiX } from "react-icons/fi";
+import { FaPlus, FaTimes } from "react-icons/fa";
 import PlusMenu from "./PlusMenu";
 
 export default function Attachment({ onFileSelect }) {
@@ -14,7 +15,7 @@ export default function Attachment({ onFileSelect }) {
 
   useEffect(() => {
     if (isOpen) {
-      setIsRendered(true);
+      setTimeout(() => setIsRendered(true), 0);
     }
   }, [isOpen]);
 
@@ -52,8 +53,12 @@ export default function Attachment({ onFileSelect }) {
         />
       )}
       <button className="attach-btn" onClick={toggleMenu}>
-        {isOpen ? <FiX /> : <FiPlus />}
+        {isOpen ? <FaTimes /> : <FaPlus />}
       </button>
     </div>
   );
 }
+
+Attachment.propTypes = {
+  onFileSelect: PropTypes.func.isRequired,
+};

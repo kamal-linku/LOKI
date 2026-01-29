@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import "./ChatInput.css";
 import Attachment from "./Attachment";
 import AttachmentPreview from "./AttachmentPreview";
-import { FiMic, FiSend } from "react-icons/fi";
+import { FaMicrophone, FaArrowUp } from "react-icons/fa";
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -13,6 +14,13 @@ export default function ChatInput({ onSendMessage }) {
   const [attachments, setAttachments] = useState([]);
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef(null);
+
+  const stopRecording = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+    }
+    setIsRecording(false);
+  };
 
   useEffect(() => {
     if (!isSpeechRecognitionSupported) {
@@ -62,13 +70,6 @@ export default function ChatInput({ onSendMessage }) {
       console.error("Error starting recording:", error);
       setIsRecording(false);
     }
-  };
-
-  const stopRecording = () => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-    }
-    setIsRecording(false);
   };
 
   const handleMicClick = () => {
@@ -138,9 +139,13 @@ export default function ChatInput({ onSendMessage }) {
               : handleMicClick
           }
         >
-          {inputValue || attachments.length > 0 ? <FiSend /> : <FiMic />}
+          {inputValue || attachments.length > 0 ? <FaArrowUp /> : <FaMicrophone />}
         </button>
       </div>
     </div>
   );
 }
+
+ChatInput.propTypes = {
+  onSendMessage: PropTypes.func.isRequired,
+};

@@ -23,7 +23,6 @@
   padding: 8px;
   border-radius: 4px;
   transition: background 0.2s ease;
-  display: none; /* Hidden by default */
 }
 
 .menu-button:hover {
