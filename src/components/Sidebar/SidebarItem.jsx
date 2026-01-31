@@ -1,6 +1,5 @@
-import { useState } from "react";
 import "./SidebarItem.css";
-import { FiMoreVertical, FiTrash } from "react-icons/fi";
+import { FiTrash } from "react-icons/fi";
 
 export default function SidebarItem({
   session,
@@ -9,17 +8,9 @@ export default function SidebarItem({
   isActive,
   isCollapsed,
 }) {
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  const handleMenuClick = (e) => {
-    e.stopPropagation(); // Prevent chat selection when clicking the menu
-    setMenuVisible(!menuVisible);
-  };
-
   const handleDeleteClick = (e) => {
     e.stopPropagation(); // Prevent chat selection
     onDeleteChat(session.id);
-    setMenuVisible(false);
   };
 
   return (
@@ -37,16 +28,9 @@ export default function SidebarItem({
       </div>
       {session.messages.length > 0 && (
         <div className="sidebar-item-menu">
-          <button className="menu-button" onClick={handleMenuClick}>
-            <FiMoreVertical />
+          <button className="delete-button" onClick={handleDeleteClick}>
+            <FiTrash />
           </button>
-          {menuVisible && (
-            <div className="delete-menu">
-              <button onClick={handleDeleteClick}>
-                <FiTrash /> Delete
-              </button>
-            </div>
-          )}
         </div>
       )}
     </div>

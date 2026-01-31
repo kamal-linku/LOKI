@@ -8,7 +8,7 @@ export default function Navbar({ toggleSidebar }) {
         <FiMenu />
       </button>
       <div className="navbar-container">
-        <div className="navbar-title">New Chat</div>
+        <div className="navbar-title">LOKI</div>
       </div>
     </nav>
   );
