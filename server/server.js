@@ -3,9 +3,17 @@ const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const port = 3001;
+
+// Database connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -45,6 +53,8 @@ app.post('/api/chat', (req, res) => {
   console.log('Received message:', message);
   res.json({ response: 'This is a canned response from the server.' });
 });
+
+app.use('/api/auth', require('./routes/auth'));
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });

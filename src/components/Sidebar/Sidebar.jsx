@@ -1,8 +1,9 @@
 import "./Sidebar.css";
 import Tool from "./Tool";
 import ChatHistory from "./ChatHistory";
-import { FiPlus, FiSearch, FiImage, FiGrid, FiFolder, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiPlus, FiSearch, FiImage, FiGrid, FiFolder, FiChevronLeft, FiChevronRight, FiLogIn, FiUserPlus } from "react-icons/fi";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({
   onNewChat,
@@ -49,6 +50,15 @@ export default function Sidebar({
         currentSessionId={currentSessionId}
         isCollapsed={isCollapsed}
       />
+
+      <div className="sidebar-auth">
+        <Link to="/login">
+          <Tool label="Login" icon={<FiLogIn />} isCollapsed={isCollapsed} />
+        </Link>
+        <Link to="/register">
+          <Tool label="Register" icon={<FiUserPlus />} isCollapsed={isCollapsed} />
+        </Link>
+      </div>
 
       {!isCollapsed && (
         <div className="sidebar-footer">

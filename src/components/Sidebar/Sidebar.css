@@ -166,9 +166,14 @@
   display: none;
 }
 
+.sidebar-auth {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
 /* ================= FOOTER ================= */
 .sidebar-footer {
-  margin-top: auto;
   padding: 16px;
   border-top: 1px solid #2a2a2a;
   font-size: 14px;
