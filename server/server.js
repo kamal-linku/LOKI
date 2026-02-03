@@ -46,6 +46,10 @@ app.post('/api/chat', (req, res) => {
   res.json({ response: 'This is a canned response from the server.' });
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
