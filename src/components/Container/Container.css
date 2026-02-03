@@ -6,8 +6,7 @@
   padding: 0px;
   width: 100%;
   flex-grow: 1;
-  overflow-y: hidden;
-  justify-content: center;
+  overflow-y: auto;
 }
 
 .chat-messages {
@@ -16,7 +15,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 10px;
-  overflow-y: auto;
   flex-grow: 1;
 }
 
@@ -134,4 +132,52 @@
 /* small margin so the typing text sits above the input */
 .typing-animation.above-input {
   margin-bottom: 18px;
+}
+
+/* Webkit scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+/* Layout tweaks for smaller screens */
+@media (max-width: 1024px) {
+  .chat-messages {
+    max-width: 720px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-messages {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .logo-container {
+    width: 120px;
+    height: 120px;
+  }
+  .loki-logo {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-messages {
+    padding: 0 6px;
+  }
+  .green-text { font-size: 1.8rem; }
+  .second-line span { font-size: 1.1rem; }
 }

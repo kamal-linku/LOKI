@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import Navbar from "../components/Navbar/Navbar";
 import Container from "../components/Container/Container";
 import ChatInput from "../components/ChatInput/ChatInput";
+import getResponse from "../data/response/responses.js";
 import "./Home.css";
 
 export default function Home() {
@@ -65,17 +66,28 @@ export default function Home() {
 
   const handleSendMessage = (message) => {
     if (message.trim() !== "") {
+      const userMessage = { text: message, type: "user", timestamp: new Date() };
+
       setChatSessions((prevSessions) =>
         prevSessions.map((session) => {
           if (session.id === currentSessionId) {
-            const newMessages = [
-              ...session.messages,
-              { text: message, type: "user", timestamp: new Date() },
-              { text: "This is a canned response.", type: "ai", timestamp: new Date() }
-            ];
+            const newMessages = [...session.messages, userMessage];
             const newTitle =
               session.messages.length === 0 ? message : session.title;
             return { ...session, title: newTitle, messages: newMessages, lastUpdated: new Date() };
+          }
+          return session;
+        })
+      );
+
+      const aiResponse = getResponse(message);
+      const aiMessage = { text: aiResponse, type: "ai", timestamp: new Date() };
+
+      setChatSessions((prevSessions) =>
+        prevSessions.map((session) => {
+          if (session.id === currentSessionId) {
+            const newMessages = [...session.messages, aiMessage];
+            return { ...session, messages: newMessages, lastUpdated: new Date() };
           }
           return session;
         })
@@ -135,6 +147,43 @@ export default function Home() {
     );
   };
 
+  const handleEditMessage = (messageIndex, newText) => {
+    // First, update the user's message optimistically
+    setChatSessions((prevSessions) =>
+      prevSessions.map((session) => {
+        if (session.id === currentSessionId) {
+          const newMessages = session.messages.map((msg, index) => {
+            if (index === messageIndex) {
+              return { ...msg, text: newText };
+            }
+            return msg;
+          });
+          return { ...session, messages: newMessages, lastUpdated: new Date() };
+        }
+        return session;
+      })
+    );
+
+    const aiResponse = getResponse(newText);
+    const aiMessage = { text: aiResponse, type: "ai", timestamp: new Date() };
+
+    setChatSessions((prevSessions) =>
+      prevSessions.map((session) => {
+        if (session.id === currentSessionId) {
+          const newMessages = session.messages.map((msg, index) => {
+            // Assuming the AI response is the next message
+            if (index === messageIndex + 1 && msg.type === 'ai') {
+              return { ...msg, text: aiResponse };
+            }
+            return msg;
+          });
+          return { ...session, messages: newMessages, lastUpdated: new Date() };
+        }
+        return session;
+      })
+    );
+  };
+
   const handleSearchChange = (query) => {
     setSearchQuery(query);
   };
@@ -172,7 +221,11 @@ export default function Home() {
       {showSidebar && <div className="sidebar-overlay" onClick={toggleSidebar}></div>}
       <main className="main">
         <Navbar toggleSidebar={toggleSidebar} />
-        <Container messages={currentChat ? currentChat.messages : []} onDeleteMessage={(messageIndex) => handleDeleteMessage(currentSessionId, messageIndex)} />
+        <Container
+          messages={currentChat ? currentChat.messages : []}
+          onDeleteMessage={(messageIndex) => handleDeleteMessage(currentSessionId, messageIndex)}
+          onEditMessage={handleEditMessage}
+        />
         <ChatInput onSendMessage={handleSendMessage} />
       </main>
     </div>

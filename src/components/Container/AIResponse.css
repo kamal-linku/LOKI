@@ -1,30 +1,39 @@
+@import "./animations.css";
+
 .ai-response {
   display: flex;
   align-items: flex-start;
-  background: #2a2a2a;
-  padding: 12px;
-  border-radius: 12px;
   margin-bottom: 10px;
   position: relative;
 }
 
 .ai-icon {
   margin-right: 10px;
+  color: var(--text-color-secondary);
 }
 
 .ai-message-container {
   display: flex;
   flex-direction: column;
   flex: 1;
+  animation: keyframes-grow-and-fade 0.3s ease-out;
+  max-width: fit-content;
 }
 
 .ai-text {
-  /* Existing styles */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: var(--text-color);
+  background-color: var(--component-background);
+  padding: 12px 18px;
+  border-radius: 20px;
+  max-width: 600px; /* A bit wider than user messages */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-.timestamp {
+.ai-message-container .timestamp {
   font-size: 0.75rem;
-  color: #888;
+  color: var(--text-color-secondary);
   margin-top: 5px;
   align-self: flex-start;
 }
@@ -37,7 +46,7 @@
 .menu-button {
   background: none;
   border: none;
-  color: #ccc;
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 5px;
   display: flex;
@@ -52,15 +61,15 @@
 }
 
 .menu-button:hover {
-  background-color: #555;
+  background-color: var(--background-color);
 }
 
 .delete-menu {
   position: absolute;
   right: 0;
   top: 30px;
-  background-color: #2a2a2a;
-  border: 1px solid #444;
+  background-color: var(--component-background);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 5px;
   z-index: 10;
@@ -83,5 +92,85 @@
 }
 
 .delete-menu button:hover {
-  background-color: #555;
+  background-color: var(--background-color);
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1024px) {
+  .ai-text {
+    max-width: 75%;
+    padding: 11px 15px;
+  }
+  .ai-icon {
+    font-size: 1.1rem;
+    margin-right: 8px;
+  }
+}
+
+/* Small tablet / large phone */
+@media (max-width: 768px) {
+  .ai-response {
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .ai-message-container {
+    max-width: 100%;
+  }
+  .ai-text {
+    max-width: 85%;
+    width: auto;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    word-break: break-word;
+  }
+  .ai-icon {
+    font-size: 1rem;
+  }
+  .menu-button {
+    opacity: 1;
+  }
+  .delete-menu {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    min-width: 120px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .ai-response {
+    gap: 6px;
+  }
+  .ai-icon {
+    font-size: 0.95rem;
+    margin-top: 4px;
+  }
+  .ai-message-container {
+    max-width: calc(100% - 48px); /* leave room for icon and padding */
+  }
+  .ai-text {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 14px;
+    max-width: 100%;
+  }
+  .menu-button {
+    opacity: 1;
+    padding: 6px;
+  }
+  .delete-menu {
+    right: 8px;
+    left: auto;
+    top: 40px;
+    min-width: 110px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  }
+}
+
+/* Utility rules to help consistent wrapping on all viewports */
+.ai-text, .ai-message-container {
+  box-sizing: border-box;
+  word-break: break-word;
 }

@@ -187,4 +187,24 @@
     padding: 10px 12px;
     justify-content: center;
   }
+  /* Show mobile hamburger inside sidebar header if needed */
+  .hamburger-menu {
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 10px;
+  }
+  /* Default hidden off-canvas behavior for sidebar on mobile - toggled by adding .show */
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: transform 0.28s ease;
+  }
+  .sidebar.show {
+    transform: translateX(0);
+  }
 }

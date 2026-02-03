@@ -1,0 +1,46 @@
+{
+  "greeting": [
+    "Hello! How can I help you today?",
+    "Hi there! What can I do for you?",
+    "Greetings! How may I assist you?"
+  ],
+  "goodbye": [
+    "Goodbye! Have a great day!",
+    "See you later!",
+    "Bye now!"
+  ],
+  "thanks": [
+    "You're welcome!",
+    "No problem!",
+    "Any time!"
+  ],
+  "help": [
+    "I can help you with a variety of tasks. What do you need help with?",
+    "I'm here to assist you. What can I do for you?",
+    "You can ask me questions, and I'll do my best to answer them."
+  ],
+  "name": [
+    "I am LOKI, your personal AI assistant.",
+    "You can call me LOKI.",
+    "My name is LOKI."
+  ],
+  "weather": [
+    "I'm sorry, I cannot provide weather information.",
+    "I am not connected to a weather service.",
+    "You can check a weather website for that information."
+  ],
+  "time": [
+    "I do not have the current time.",
+    "You can check the clock on your device for the time."
+  ],
+  "joke": [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "What do you call a fake noodle? An Impasta!",
+    "I told my wife she was drawing her eyebrows too high. She looked surprised."
+  ],
+  "default": [
+    "I'm sorry, I don't understand. Could you please rephrase that?",
+    "I'm not sure I understand. Can you try again?",
+    "I'm still learning and I'm not sure how to respond to that."
+  ]
+}

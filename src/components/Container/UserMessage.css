@@ -1,3 +1,5 @@
+@import "./animations.css";
+
 .user-message {
   display: flex;
   justify-content: flex-end;
@@ -6,29 +8,27 @@
   position: relative;
 }
 
-.user-icon {
-  margin-left: 10px;
-}
-
 .user-message-container {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  animation: keyframes-grow-and-fade 0.3s ease-out;
 }
 
 .user-message p {
-  background-color: #007bff;
-  color: white;
+  background-color: rgb(13, 136, 128);
+  color: var(--text-color);
   padding: 12px 18px;
   border-radius: 20px;
-  max-width: 400px; /* Increased max-width */
+  max-width: 400px;
   word-wrap: break-word;
-  font-size: 1rem; /* Adjusted font size */
+  font-size: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .user-message .timestamp {
     font-size: 0.75rem;
-    color: #888;
+    color: var(--text-color-secondary);
     margin-top: 5px;
     align-self: flex-end;
 }
@@ -41,7 +41,7 @@
 .menu-button {
   background: none;
   border: none;
-  color: #ccc;
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 5px;
   display: flex;
@@ -56,15 +56,15 @@
 }
 
 .menu-button:hover {
-  background-color: #555;
+  background-color: var(--background-color);
 }
 
 .delete-menu {
   position: absolute;
   right: 0;
   top: 30px;
-  background-color: #2a2a2a;
-  border: 1px solid #444;
+  background-color: var(--component-background);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 5px;
   z-index: 10;
@@ -87,5 +87,75 @@
 }
 
 .delete-menu button:hover {
-  background-color: #555;
+  background-color: var(--background-color);
+}
+
+/* Edit message styles */
+.edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 420px;
+  width: 100%;
+  align-self: flex-end;
+}
+
+.edit-container textarea {
+  min-height: 64px;
+  max-height: 220px;
+  resize: vertical;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--component-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.4;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+  outline: none;
+}
+
+.edit-container textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.edit-buttons button {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.15s ease, transform 0.08s ease;
+}
+
+.edit-buttons button:first-child {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.edit-buttons button:first-child:hover {
+  filter: brightness(90%);
+}
+
+.edit-buttons button:last-child {
+  background-color: transparent;
+  color: var(--text-color-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.edit-buttons button:last-child:hover {
+  background-color: var(--background-color);
+}
+
+.user-message .edit-container p,
+.user-message .edit-container > * {
+  box-sizing: border-box;
 }

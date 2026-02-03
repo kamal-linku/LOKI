@@ -104,3 +104,42 @@
   width: 22px;
   height: 22px;
 }
+
+/* Responsive tweaks for chat input */
+@media (max-width: 768px) {
+  .chat-input {
+    max-width: 100%;
+    padding: 10px;
+  }
+  .chat-input .icon-button {
+    width: 36px;
+    height: 36px;
+  }
+  .attachment-previews {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-input-wrapper {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 12px;
+    background-color: #000000; /* keep same BG */
+    z-index: 999;
+  }
+  .chat-input {
+    padding: 8px;
+    border-radius: 999px;
+  }
+  .chat-input input {
+    font-size: 14px;
+  }
+  .attachment-previews {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+}

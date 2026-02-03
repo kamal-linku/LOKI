@@ -3,3 +3,30 @@ body {
   background: #212121;
   font-family: system-ui, sans-serif;
 }
+
+.typing {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 0.8s steps(35, end) 0.5s forwards, blink-caret 0.75s step-end infinite;
+  border-right: 0.1em solid rgb(15, 153, 163);
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* @keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: skyblue;
+  }
+} */
